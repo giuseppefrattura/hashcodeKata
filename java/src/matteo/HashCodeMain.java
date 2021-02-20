@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class HashCodeMain {
 
@@ -57,14 +59,41 @@ public class HashCodeMain {
                 booksOfThisLibrary.add(      // Book(id, score)
                         new Book(Integer.parseInt(words[j]), allBooks.get(Integer.parseInt(words[j])).getScore()));
             }
+
+            // ordino i libri per valore decrescente
+            Collections.sort(booksOfThisLibrary, new Comparator<Book>() {
+                @Override
+                public int compare(Book o1, Book o2) {
+                    if (o1.getScore() > o2.getScore())
+                        return -1;
+                    if (o1.getScore() < o2.getScore())
+                        return  11;
+                    else
+                        return 0;
+                }
+            });
+
             allLibraries.get(i).setBooksList(booksOfThisLibrary);
+        }
+
+
+        /////////////////////////////////
+
+        for (Library l : allLibraries){
 
         }
+
+
+
+
+
+
 
         // try to print out total value of books owned by all libraries
         int totalScore = 0;
         for (Library l: allLibraries){
             for (Book b: l.getBooksList()){
+                System.out.println("score " + b.getScore());
                 totalScore += b.getScore();
             }
         }
