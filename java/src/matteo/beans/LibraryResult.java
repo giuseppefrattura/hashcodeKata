@@ -9,6 +9,7 @@ public class LibraryResult {
 
     public LibraryResult(int id){
         this.id = id;
+        this.scannedBooks = new ArrayList<>();
     }
 
     public int getId() {

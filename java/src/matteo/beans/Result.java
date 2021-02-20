@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Result {
 
-    private ArrayList<LibraryResult> allSignedUpLibraries;
+    private ArrayList<LibraryResult> allSignedUpLibraries = new ArrayList<>();
 
     public ArrayList<LibraryResult> getAllLibraries() {
         return allSignedUpLibraries;

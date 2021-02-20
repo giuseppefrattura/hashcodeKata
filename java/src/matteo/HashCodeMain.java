@@ -32,7 +32,7 @@ public class HashCodeMain {
         // per leggere da file
         String input    = null;
         String[] words  = null;
-        BufferedReader reader = new BufferedReader(new FileReader("java/resources/a.in"));
+        BufferedReader reader = new BufferedReader(new FileReader("java/resources/c.in"));
 
 
         // leggo prima riga
@@ -97,43 +97,59 @@ public class HashCodeMain {
                     totalBooksValue += currentBook.getScore();
                 }
 
-                l.setCoefficient(totalBooksValue * remainingDays / l.getSignupDays());
+                if (l.getSignupDays() != 0)
+                    l.setCoefficient(totalBooksValue * remainingDays / l.getSignupDays());
+
             }
 
-            // ordino le librerie per coefficiente
-            Collections.sort(allLibraries, new Comparator<Library>() {
-                @Override
-                public int compare(Library o1, Library o2) {
-                    if (o1.getCoefficient() > o2.getCoefficient())
-                        return 1;
-                    if (o1.getCoefficient() < o2.getCoefficient())
-                        return -1;
-                    else
-                        return 0;
+
+            try {
+                if (allLibraries.get(0).getSignupDays() > 0) {
+                    // la libreria si sta iscrivendo
+                    allLibraries.get(0).decrementSignupDays();
+                } else if (allLibraries.get(0).getSignupDays() == 0) {
+                    // la libreria è iscritta
+                    try {
+                        allLibraries.get(1).decrementSignupDays();
+                    } catch (Exception e) {
+                        //
+                    }
+                    signedUpLibraries.add(allLibraries.remove(0));
+                    // ordino le librerie per coefficiente
+                    if (!allLibraries.isEmpty()) {
+                        Collections.sort(allLibraries, new Comparator<Library>() {
+                            @Override
+                            public int compare(Library o1, Library o2) {
+                                if (o1.getCoefficient() > o2.getCoefficient())
+                                    return 1;
+                                if (o1.getCoefficient() < o2.getCoefficient())
+                                    return -1;
+                                else
+                                    return 0;
+                            }
+                        });
+                    }
                 }
-            });
-
-            if (allLibraries.get(0).getSignupDays() > 0) {
-                // la libreria si sta iscrivendo
-                allLibraries.get(0).decrementSignupDays();
             }
-            else if (allLibraries.get(0).getSignupDays() == 0){
-                // la libreria è iscritta
-                signedUpLibraries.add( allLibraries.remove(0));
+            catch (Exception e){
+                //
             }
 
             for (Library l : signedUpLibraries){
                 //inviamo i libri
                 for (int k=0; k < l.getBooksPerDay(); k++){
                     // map ID -> BOOK     --> duplicati gestiti correttamente
-                    if (mapIdToScannedBook.get(l.getBooksList().get(0).getId()) == null){
-                        // ancora da inviare
-                        mapBookIdToLibrary.put(l.getBooksList().get(0).getId(), l); //mappa x risultato
-                        mapIdToScannedBook.put(l.getBooksList().get(0).getId(), l.getBooksList().remove(0));
-                    }
-                    else {
-                        // già inviato. rimuovere
-                        l.getBooksList().remove(0);
+                    try {
+                        if (mapIdToScannedBook.get(l.getBooksList().get(0).getId()) == null) {
+                            // ancora da inviare
+                            mapBookIdToLibrary.put(l.getBooksList().get(0).getId(), l); //mappa x risultato
+                            mapIdToScannedBook.put(l.getBooksList().get(0).getId(), l.getBooksList().remove(0));
+                        } else {
+                            // già inviato. rimuovere
+                            l.getBooksList().remove(0);
+                        }
+                    }catch (IndexOutOfBoundsException e){
+                        // do nothiing
                     }
 
                 }
@@ -155,7 +171,7 @@ public class HashCodeMain {
 
         MyFileWriter writer = new MyFileWriter();
         writer.writeFile(result);
-        
+
 
     }
 }
