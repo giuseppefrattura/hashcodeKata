@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Result {
 
-    private ArrayList<Library> allLibraries;
+    private ArrayList<LibraryResult> allSignedUpLibraries;
 
-    public ArrayList<Library> getAllLibraries() {
-        return allLibraries;
+    public ArrayList<LibraryResult> getAllLibraries() {
+        return allSignedUpLibraries;
     }
 
-    public void setAllLibraries(ArrayList<Library> allLibraries) {
-        this.allLibraries = allLibraries;
+    public void setAllLibraries(ArrayList<LibraryResult> allLibraries) {
+        this.allSignedUpLibraries = allLibraries;
     }
 
-    public void addLibrary(Library lib){
-        this.allLibraries.add(lib);
+    public void addLibrary(LibraryResult lib){
+        this.allSignedUpLibraries.add(lib);
     }
 }

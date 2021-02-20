@@ -1,12 +1,14 @@
+package matteo;
 
 import matteo.beans.Book;
 import matteo.beans.Library;
+import matteo.beans.LibraryResult;
 import matteo.beans.Result;
 
 import java.io.*;
 
 
-public class FileWriter {
+public class MyFileWriter {
 
     public void writeFile(Result result) throws IOException {
         File fout = new File("out.txt");
@@ -17,7 +19,7 @@ public class FileWriter {
         bw.newLine();
 
         //Logica
-        Library library;
+        LibraryResult library;
         for (int i = 0; i < totLibraries; i++) {
             library = result.getAllLibraries().get(i);
             bw.write(String.valueOf(library.getId()) +" " + String.valueOf(library.getBooksList().size()));

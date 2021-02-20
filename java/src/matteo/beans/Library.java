@@ -7,12 +7,29 @@ public class Library {
     private int id;
     private int signupDays;
     private int booksPerDay;
+    private float coefficient;
     private ArrayList<Book> booksList;
 
     public Library(int id, int signupDays, int booksPerDay){
         this.id = id;
         this.signupDays = signupDays;
         this.booksPerDay = booksPerDay;
+    }
+
+
+    public void decrementSignupDays(){
+        signupDays --;
+    }
+
+
+
+
+    public float getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(float coefficient) {
+        this.coefficient = coefficient;
     }
 
     public int getId() {
@@ -34,6 +51,7 @@ public class Library {
     public void setBooksList(ArrayList<Book> booksList) {
         this.booksList = booksList;
     }
+
 }
 
 
