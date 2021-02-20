@@ -55,7 +55,7 @@ public class HashCodeMain {
             // Creo lista di libri posseduti con id, valore
             for (int j=0; j<numberOfBooks; j++){
                 booksOfThisLibrary.add(      // Book(id, score)
-                        new Book(Integer.parseInt(words[j]), allBooks.get(j).getScore()));
+                        new Book(Integer.parseInt(words[j]), allBooks.get(Integer.parseInt(words[j])).getScore()));
             }
             allLibraries.get(i).setBooksList(booksOfThisLibrary);
 
