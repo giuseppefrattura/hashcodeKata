@@ -22,7 +22,7 @@ public class HashCodeMain {
         // per leggere da file
         String input    = null;
         String[] words  = null;
-        BufferedReader reader = new BufferedReader(new FileReader("inputFiles/a.in"));
+        BufferedReader reader = new BufferedReader(new FileReader("java/resources/a.in"));
 
 
         // leggo prima riga
